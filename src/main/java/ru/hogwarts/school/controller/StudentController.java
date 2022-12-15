@@ -51,18 +51,10 @@ public class StudentController {
 
     }
 
-    /*@GetMapping
-    public ResponseEntity<Collection<Student>> findStudentByAge (@RequestParam(required = false) int age) {
-        if (age <= 0) {
-            ResponseEntity.ok(Collections.emptyList());
-        }
-        return  ResponseEntity.ok(studentService.findStudentByAge(age));
-
-    }*/
 
     @GetMapping
     public ResponseEntity<Collection<Student>> findStudentByAgeBetween
-            (@RequestParam int min, int max) {
+            (@RequestParam int min, @RequestParam int max) {
         if (min >= max || min < 0 || max <=0) {
             ResponseEntity.badRequest().build();
         }
@@ -70,9 +62,12 @@ public class StudentController {
 
     }
 
-    @GetMapping("faculty")
+    @GetMapping("{id}/faculty")
     public ResponseEntity <Faculty> getFacultyOfStudent
             (@PathVariable Long id) {
+        if (studentService.getFacultyOfStudent(id) == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok(studentService.getFacultyOfStudent(id));
 

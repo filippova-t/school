@@ -18,21 +18,26 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student createStudent (Student student) {
+    public Student createStudent(Student student) {
+        student.setId(null);
         return studentRepository.save(student);
     }
+
     @Override
     public Student findStudent(long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
     }
 
     @Override
     public Student editStudent(Student student) {
-        return studentRepository.save(student);
+        if (studentRepository.existsById(student.getId())) {
+            return studentRepository.save(student);
+        }
+        return null;
     }
 
     @Override
-    public void deleteStudent (long id) {
+    public void deleteStudent(long id) {
         studentRepository.deleteById(id);
     }
 
@@ -42,14 +47,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Collection <Student> findByAgeBetween(int min, int max) {
+    public Collection<Student> findByAgeBetween(int min, int max) {
         return studentRepository.findByAgeBetween(min, max);
     }
 
     @Override
-    public Faculty getFacultyOfStudent (Long studentId) {
-        return studentRepository.findById(studentId).get().getFaculty();
-
+    public Faculty getFacultyOfStudent(Long id) {
+        Student foundStudent = studentRepository.findById(id).orElse(null);
+        if (foundStudent == null) {
+            return null;
+        }
+        return foundStudent.getFaculty();
     }
-
 }

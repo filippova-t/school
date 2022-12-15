@@ -38,11 +38,10 @@ public class FacultyController {
 
     @PutMapping
     public ResponseEntity<Faculty> editFaculty (@RequestBody Faculty faculty) {
-        Faculty foundFaculty = facultyService.editFaculty(faculty);
-        if (foundFaculty == null) {
+        if (facultyService.editFaculty(faculty) == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(foundFaculty);
+        return ResponseEntity.ok(facultyService.editFaculty(faculty));
     }
 
     @DeleteMapping("{id}")
@@ -52,23 +51,15 @@ public class FacultyController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Faculty>> findFaculty(@RequestParam(required = false) String color,
-                                                           @RequestParam(required = false) String name) {
-        if (name != null && !name.isBlank()) {
-            return ResponseEntity.ok(facultyService.findFacultyByName(name));
-        }
-
-        if (color != null && !color.isBlank()) {
-            return ResponseEntity.ok(facultyService.findFacultyByColor(color));
-        }
-        return ResponseEntity.ok(Collections.emptyList());
+    public ResponseEntity<Faculty> findFaculty(@RequestParam String nameOrColor) {
+        return ResponseEntity.ok(facultyService.findFacultyByNameOrColor(nameOrColor));
     }
 
-    @GetMapping("students")
-    public ResponseEntity <Collection<Student>> geListStudentsOfFaculty
-            (@PathVariable String name) {
+   @GetMapping("{id}/students")
+    public ResponseEntity <Collection<Student>> getListStudentsOfFaculty
+            (@PathVariable Long id) {
 
-        return ResponseEntity.ok(facultyService.geListStudentsOfFaculty(name));
+        return ResponseEntity.ok(facultyService.getListStudentsOfFaculty(id));
 
     }
 }
