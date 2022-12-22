@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("student")
@@ -121,5 +122,26 @@ public class StudentController {
         }
     }
 
+    @GetMapping ("/count")
+    public Long getCountOfStudents () {
+        return studentService.getCountOfStudents();
+    }
+
+    @GetMapping ("/average-age")
+    public Double getAverageAge () {
+        return studentService.getAverageAge();
+    }
+
+    @GetMapping ("/last-five-id-students")
+    public List<Student> getListFiveLastIdStudents () {
+        return studentService.getListFiveLastIdStudents();
+    }
+
+    @GetMapping("/list-of-avatars")
+    public ResponseEntity<List<Avatar>> getListOfAvatars (
+            @RequestParam ("page") Integer pageNumber, @RequestParam ("size") Integer pageSize) {
+        List<Avatar> avatars = avatarService.getListOfAvatars (pageNumber, pageSize);
+        return ResponseEntity.ok(avatars);
+    }
 
 }

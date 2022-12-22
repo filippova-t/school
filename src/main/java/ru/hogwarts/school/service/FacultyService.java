@@ -18,4 +18,5 @@ public interface FacultyService {
 
     Collection<Student> getListStudentsOfFaculty(Long id);
 
+
 }
