@@ -19,7 +19,7 @@ public class StudentServiceImpl implements StudentService {
         this.studentRepository = studentRepository;
     }
 
-    Logger logger = LoggerFactory.getLogger (StudentServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger (StudentServiceImpl.class);
 
     @Override
     public Student createStudent(Student student) {
