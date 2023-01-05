@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+import java.util.OptionalDouble;
 
 @RestController
 @RequestMapping("student")
@@ -144,4 +145,13 @@ public class StudentController {
         return ResponseEntity.ok(avatars);
     }
 
+    @GetMapping("/names-start-with-a")
+    public ResponseEntity<Collection<String>> getStudentsNamesStartWithA () {
+        return ResponseEntity.ok(studentService.getStudentsNamesStartWithA());
+    }
+
+    @GetMapping("/average-age-using-stream")
+    public ResponseEntity<OptionalDouble> getAverageAgeOfStudents () {
+        return ResponseEntity.ok(studentService.getAverageAgeOfStudents());
+    }
 }

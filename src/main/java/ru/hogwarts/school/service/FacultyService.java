@@ -4,6 +4,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface FacultyService {
     Faculty createFaculty(Faculty faculty);
@@ -19,4 +20,7 @@ public interface FacultyService {
     Collection<Student> getListStudentsOfFaculty(Long id);
 
 
+    Optional<String> getLongestNameOfFaculty();
+
+    Integer getSum();
 }
