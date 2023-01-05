@@ -151,7 +151,7 @@ public class StudentController {
     }
 
     @GetMapping("/average-age-using-stream")
-    public ResponseEntity<OptionalDouble> getAverageAgeOfStudents () {
+    public ResponseEntity<Double> getAverageAgeOfStudents () {
         return ResponseEntity.ok(studentService.getAverageAgeOfStudents());
     }
 }

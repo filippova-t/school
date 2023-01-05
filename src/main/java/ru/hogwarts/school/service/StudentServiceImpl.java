@@ -98,16 +98,17 @@ public class StudentServiceImpl implements StudentService {
     public Collection<String> getStudentsNamesStartWithA (){
         return studentRepository.findAll().stream()
                 .map (student -> student.getName())
+                .map (s -> s.toUpperCase())
                 .filter (e -> e.startsWith("A"))
                 .sorted (Comparator.naturalOrder())
-                .map (s -> s.toUpperCase())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public OptionalDouble getAverageAgeOfStudents () {
+    public Double getAverageAgeOfStudents () {
         return studentRepository.findAll().stream()
-                .mapToDouble (student -> student.getAge())
-                .average();
+                .mapToInt (student -> student.getAge())
+                .average()
+                .orElse(0);
     }
 }
