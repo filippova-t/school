@@ -70,7 +70,7 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.getLongestNameOfFaculty());
     }
 
-    @GetMapping("integer")
+    @GetMapping("sum")
     public Integer getSum () {
         return facultyService.getSum();
     }

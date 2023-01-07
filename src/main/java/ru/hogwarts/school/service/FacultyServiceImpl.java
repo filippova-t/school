@@ -79,11 +79,15 @@ public class FacultyServiceImpl implements FacultyService{
 
     @Override
     public Integer getSum () {
+        long time = System.currentTimeMillis();
         int sum = Stream.iterate(1, a -> a +1)
                 .limit(1_000_000)
-                .parallel()
+                //.parallel()
                 .reduce(0, (a, b) -> a + b );
+        time = System.currentTimeMillis() - time;
+        logger.info ("time = {}", time);
         return sum;
+
     }
 
 
