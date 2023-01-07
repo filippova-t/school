@@ -154,4 +154,14 @@ public class StudentController {
     public ResponseEntity<Double> getAverageAgeOfStudents () {
         return ResponseEntity.ok(studentService.getAverageAgeOfStudents());
     }
+
+    @GetMapping("/print-names-step1")
+    public void printNamesStep1 () {
+        studentService.printNames1();
+    }
+
+    @GetMapping("/print-names-step2")
+    public void printNamesStep2 () {
+        studentService.printNames2();
+    }
 }
